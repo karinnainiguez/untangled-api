@@ -4,8 +4,7 @@ Build-Jdk: 10.0.1
 Implementation-Title: Untangled Backend API
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: com.untangled.api
-Implementation-Vendor: Pivotal Software, Inc.
-Implementation-URL: http://projects.spring.io/spring-boot/untangled-ap
- i/
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/untangled-api
 Created-By: Maven Integration for Eclipse
 
