@@ -4,10 +4,19 @@ public class Path {
 
 	
 	private int length;
-	private String[] URLCollection;
+	private String[] URLCollection = {
+			"www.wiki.com/1",
+			"www.wiki.com/5",
+			"www.wiki.com/8"
+			};
 	
 	public Path() {
 		
+	}
+	
+	public Path(int length) {
+		super();
+		this.length = length;
 	}
 	
 	public Path(int length, String[] uRLCollection) {
