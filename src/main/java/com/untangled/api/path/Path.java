@@ -1,14 +1,12 @@
 package com.untangled.api.path;
 
+import java.util.ArrayList;
+
 public class Path {
 
 	
 	private int length;
-	private String[] URLCollection = {
-			"www.wiki.com/1",
-			"www.wiki.com/5",
-			"www.wiki.com/8"
-			};
+	private ArrayList<String> URLCollection;
 	
 	public Path() {
 		
@@ -19,10 +17,10 @@ public class Path {
 		this.length = length;
 	}
 	
-	public Path(int length, String[] uRLCollection) {
+	public Path(int length, ArrayList<String> arrayList) {
 		super();
 		this.length = length;
-		URLCollection = uRLCollection;
+		URLCollection = arrayList;
 	}
 	
 	public int getLength() {
@@ -31,10 +29,10 @@ public class Path {
 	public void setLength(int length) {
 		this.length = length;
 	}
-	public String[] getURLCollection() {
+	public ArrayList<String> getURLCollection() {
 		return URLCollection;
 	}
-	public void setURLCollection(String[] uRLCollection) {
+	public void setURLCollection(ArrayList<String> uRLCollection) {
 		URLCollection = uRLCollection;
 	}
 	
