@@ -1,7 +1,7 @@
 package com.untangled.api.page;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.untangled.api.path.Link;
+import com.untangled.api.link.Link;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Page {

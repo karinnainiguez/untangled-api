@@ -1,4 +1,4 @@
-package com.untangled.api.path;
+package com.untangled.api.link;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
