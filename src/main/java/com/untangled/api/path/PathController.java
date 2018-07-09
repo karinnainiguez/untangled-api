@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,6 +23,9 @@ import com.untangled.api.page.Page;
 
 @RestController
 public class PathController {
+	
+	@Autowired
+	private PathService pathService;
 	RestTemplate restTemplate = new RestTemplate();
 	
 	@RequestMapping("/paths/{start}/{end}")
@@ -49,62 +53,8 @@ public class PathController {
 	
 	@RequestMapping("/newTest")
 	public Page newResponse() {
-		String stringResponse = restTemplate.getForObject(
-				"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&pllimit=max&plnamespace=0&titles=Software_development", 
-				String.class
-				);
-		System.out.println("the ENTIRE response: ");
-		System.out.println(stringResponse);
-		System.out.println("\n\nMe trying to get into the pages:");
-		String subString = stringResponse.substring(stringResponse.indexOf("pageid") - 2, stringResponse.lastIndexOf("]") + 2);
-		System.out.println(subString);
+		return pathService.generatePage();
 		
-		ObjectMapper objectMapper = new ObjectMapper();
-		
-		Page page = null;
-		try {
-			page = objectMapper.readValue(subString, Page.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println("\n\nThis may have worked!");
-		System.out.println(page.getTitle());
-		System.out.println("\n\n and now for the real test");
-		System.out.println(page.getLinks());
-		return page;
-		
-		
-		
-		
-		
-//		System.out.println("\n\nMe trying to make it into an array");
-//		String[] stringArr = subString.split(",");
-//		System.out.println(Arrays.toString(stringArr));
-		
-//		Hashtable<String, String> hashResponse = restTemplate.getForObject(
-//				"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&pllimit=max&plnamespace=0&titles=Software_development", 
-//				Hashtable.class
-//				);
-//		return hashResponse;
-//		
-		
-		
-//		
-//		
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//		HttpEntity<Hashtable> entity = new HttpEntity<Hashtable>(headers);
-//		Hashtable hashResponse = restTemplate.exchange(
-//				"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&pllimit=max&plnamespace=0&titles=Software_development", 
-//				HttpMethod.GET, 
-//				entity, 
-//				Hashtable.class
-//				).getBody();
-////		System.out.println(hashResponse.get("query").get("pages"));
-//		Object queryResponse = hashResponse.get("query");
-//		return queryResponse;
 	}
 
 }
