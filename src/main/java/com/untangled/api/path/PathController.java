@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.untangled.api.page.Page;
 
 
 @RestController
@@ -47,7 +48,7 @@ public class PathController {
 	}
 	
 	@RequestMapping("/newTest")
-	public void newResponse() {
+	public Page newResponse() {
 		String stringResponse = restTemplate.getForObject(
 				"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&pllimit=max&plnamespace=0&titles=Software_development", 
 				String.class
@@ -70,6 +71,9 @@ public class PathController {
 		
 		System.out.println("\n\nThis may have worked!");
 		System.out.println(page.getTitle());
+		System.out.println("\n\n and now for the real test");
+		System.out.println(page.getLinks());
+		return page;
 		
 		
 		

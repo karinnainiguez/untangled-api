@@ -1,6 +1,7 @@
-package com.untangled.api.path;
+package com.untangled.api.page;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.untangled.api.path.Link;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Page {
@@ -29,6 +30,9 @@ public class Page {
 
 	public void setLinks(Link[] links) {
 		this.links = links;
+		for(Link link : this.links) {
+			System.out.println(link.getTitle());
+		}
 	}
 	
 
