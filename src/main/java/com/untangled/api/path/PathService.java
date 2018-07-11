@@ -25,9 +25,10 @@ public class PathService {
 				);
 	}
 
-	public Page generatePage() {
+	public Page generatePage(String pageName) {
+		String formatName = pageName.replaceAll(" ", "_");
 		String stringResponse = restTemplate.getForObject(
-				"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&pllimit=max&plnamespace=0&titles=Software_development", 
+				"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&pllimit=max&plnamespace=0&titles=" + formatName, 
 				String.class
 				);
 		System.out.println("the ENTIRE response: ");

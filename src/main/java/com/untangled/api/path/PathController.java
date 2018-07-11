@@ -34,9 +34,9 @@ public class PathController {
 //				).getBody();
 //	}
 	
-	@RequestMapping("/newTest")
-	public Page newResponse() {
-		return pathService.generatePage();
+	@RequestMapping("/newTest/{pageName}")
+	public Page newResponse(@PathVariable String pageName) {
+		return pathService.generatePage(pageName);
 		
 	}
 
