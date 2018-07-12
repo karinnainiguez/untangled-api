@@ -2,6 +2,8 @@ package com.untangled.api.path;
 
 import java.util.List;
 
+import org.jgrapht.GraphPath;
+import org.jgrapht.graph.DefaultEdge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +19,8 @@ public class PathController {
 	private PathService pathService;
 	
 	@RequestMapping("/paths/{start}/{end}")
-	public List<Path> getPaths(@PathVariable String start, @PathVariable String end) {
-		return pathService.getAllPaths();
+	public void getPaths(@PathVariable String start, @PathVariable String end) {
+		pathService.generatePaths(start, end);
 	}
 	
 //	@RequestMapping("/testapi")

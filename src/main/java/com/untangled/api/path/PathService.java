@@ -5,6 +5,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.connectivity.KosarajuStrongConnectivityInspector;
+import org.jgrapht.alg.interfaces.ShortestPathAlgorithm.SingleSourcePaths;
+import org.jgrapht.alg.interfaces.StrongConnectivityAlgorithm;
+import org.jgrapht.alg.shortestpath.AllDirectedPaths;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DefaultEdge;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -53,26 +62,63 @@ public class PathService {
 		return page;
 	}
 	
-	public List<Path> generatePaths(String start, String end){
+	public void generatePaths(String start, String end){
+		
+		// create pages from start and end. 
+		Page startPage = generatePage(start);
+		
+		Page endPage = generatePage(end);
 		
 		
+		// create a graph from the start page 
+		
+		Graph<String, DefaultEdge> directedGraph = new DefaultDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
+		
+		directedGraph.addVertex("a");
+        directedGraph.addVertex("b");
+        directedGraph.addVertex("c");
+        directedGraph.addVertex("d");
+        directedGraph.addVertex("e");
+        directedGraph.addVertex("f");
+        directedGraph.addVertex("g");
+        directedGraph.addVertex("h");
+        directedGraph.addVertex("i");
+        directedGraph.addEdge("a", "b");
+        directedGraph.addEdge("b", "d");
+        directedGraph.addEdge("d", "c");
+        directedGraph.addEdge("c", "a");
+        directedGraph.addEdge("e", "d");
+        directedGraph.addEdge("e", "f");
+        directedGraph.addEdge("f", "g");
+        directedGraph.addEdge("g", "e");
+        directedGraph.addEdge("h", "e");
+        directedGraph.addEdge("i", "h");
+        directedGraph.addEdge("i", "e");
 		
 		
+		// get paths from start (i)
+        
+        DijkstraShortestPath<String, DefaultEdge> dijkstraAlg = new DijkstraShortestPath<>(directedGraph);
 		
+        SingleSourcePaths<String, DefaultEdge> iPaths = dijkstraAlg.getPaths("i");
 		
-		
-		
-		
-		
-		
+		// return paths only to end
+        System.out.println(iPaths.getPath("c") + "\n");
+        
+        
+        AllDirectedPaths<String, DefaultEdge> dirPaths = new AllDirectedPaths<String, DefaultEdge>(directedGraph);
+		List<GraphPath<String, DefaultEdge>> pathCollection = dirPaths.getAllPaths("i", "c", true, 9);
+        System.out.println(pathCollection);
+        System.out.println(pathCollection.getClass());
+        
+        for ( GraphPath<String, DefaultEdge> path : pathCollection) {
+        	System.out.println(path.getVertexList());
+        }
+        
 		
 		
 		// create list of topics to return 
-		return Arrays.asList(
-				new Path(1, new ArrayList<String>(Arrays.asList("thisis my first url string", "this is my second url string", "put in from controller"))), 
-				new Path(4, new ArrayList<String>(Arrays.asList("second path url1", "secondpath url2"))), 
-				new Path(5, new ArrayList<String>(Arrays.asList("third path only has one")))
-				);
+//		return pathCollection;
 	}
 
 }

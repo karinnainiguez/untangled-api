@@ -3,7 +3,6 @@ package com.untangled.api.path;
 import java.util.ArrayList;
 
 public class Path {
-
 	
 	private int length;
 	private ArrayList<String> URLCollection;
