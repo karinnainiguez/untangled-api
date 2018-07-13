@@ -18,7 +18,14 @@ public class PathController {
 	
 	@RequestMapping("/paths/{start}/{end}")
 	public void getPaths(@PathVariable String start, @PathVariable String end) {
-		pathService.generatePaths(start, end);
+		
+		String formatStart = start.replaceAll("%20", "_");
+		formatStart = formatStart.replaceAll(" ", "_");
+		
+		String formatEnd = end.replaceAll("%20", "_");
+		formatEnd = formatEnd.replaceAll(" ", "_");
+				
+		pathService.generatePaths(formatStart, formatEnd);
 	}
 	
 //	@RequestMapping("/testapi")

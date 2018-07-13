@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.untangled.api.link.Link;
 import com.untangled.api.page.Page;
 
 @Service
@@ -35,7 +36,7 @@ public class PathService {
 	}
 
 	public Page generatePage(String pageName) {
-		// format page name withoug whitespace
+		// format page name without whitespace
 		String formatName = pageName.replaceAll(" ", "_");
 		
 		// get response from external API as string
@@ -72,54 +73,76 @@ public class PathService {
 		
 		// create a graph from the start page 
 		
-		Graph<String, DefaultEdge> directedGraph = new DefaultDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
+		Graph<Page, DefaultEdge> directedGraph = new DefaultDirectedGraph<Page, DefaultEdge>(DefaultEdge.class);
 		
-		directedGraph.addVertex("a");
-        directedGraph.addVertex("b");
-        directedGraph.addVertex("c");
-        directedGraph.addVertex("d");
-        directedGraph.addVertex("e");
-        directedGraph.addVertex("f");
-        directedGraph.addVertex("g");
-        directedGraph.addVertex("h");
-        directedGraph.addVertex("i");
-        directedGraph.addEdge("a", "b");
-        directedGraph.addEdge("b", "d");
-        directedGraph.addEdge("d", "c");
-        directedGraph.addEdge("c", "a");
-        directedGraph.addEdge("e", "d");
-        directedGraph.addEdge("e", "f");
-        directedGraph.addEdge("f", "g");
-        directedGraph.addEdge("g", "e");
-        directedGraph.addEdge("h", "e");
-        directedGraph.addEdge("i", "h");
-        directedGraph.addEdge("i", "e");
+		directedGraph.addVertex(startPage);
+		buildChildNodes(directedGraph, startPage, 2);
 		
-		// get paths from start (i)
-        
-        DijkstraShortestPath<String, DefaultEdge> dijkstraAlg = new DijkstraShortestPath<>(directedGraph);
 		
-        SingleSourcePaths<String, DefaultEdge> iPaths = dijkstraAlg.getPaths("i");
+//		Graph<String, DefaultEdge> directedGraph = new DefaultDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
+//		
+//		directedGraph.addVertex("a");
+//        directedGraph.addVertex("b");
+//        directedGraph.addVertex("c");
+//        directedGraph.addVertex("d");
+//        directedGraph.addVertex("e");
+//        directedGraph.addVertex("f");
+//        directedGraph.addVertex("g");
+//        directedGraph.addVertex("h");
+//        directedGraph.addVertex("i");
+//        directedGraph.addEdge("a", "b");
+//        directedGraph.addEdge("b", "d");
+//        directedGraph.addEdge("d", "c");
+//        directedGraph.addEdge("c", "a");
+//        directedGraph.addEdge("e", "d");
+//        directedGraph.addEdge("e", "f");
+//        directedGraph.addEdge("f", "g");
+//        directedGraph.addEdge("g", "e");
+//        directedGraph.addEdge("h", "e");
+//        directedGraph.addEdge("i", "h");
+//        directedGraph.addEdge("i", "e");
 		
-		// return best path only to end
-        System.out.println(iPaths.getPath("c") + "\n");
+//		// get paths from start (i)
+//        
+//        DijkstraShortestPath<Page, DefaultEdge> dijkstraAlg = new DijkstraShortestPath<>(directedGraph);
+//		
+//        SingleSourcePaths<Page, DefaultEdge> iPaths = dijkstraAlg.getPaths(startPage);
+//		
+//		// return best path only to end
+//        System.out.println(iPaths.getPath(endPage) + "\n");
         
         
         // for all the possible paths
         
-        AllDirectedPaths<String, DefaultEdge> dirPaths = new AllDirectedPaths<String, DefaultEdge>(directedGraph);
-		List<GraphPath<String, DefaultEdge>> pathCollection = dirPaths.getAllPaths("i", "c", true, 9);
-        System.out.println(pathCollection);
-        System.out.println(pathCollection.getClass());
-        
-        for ( GraphPath<String, DefaultEdge> path : pathCollection) {
-        	System.out.println(path.getVertexList());
-        }
-        
+//        AllDirectedPaths<Page, DefaultEdge> dirPaths = new AllDirectedPaths<Page, DefaultEdge>(directedGraph);
+//		List<GraphPath<Page, DefaultEdge>> pathCollection = dirPaths.getAllPaths(startPage, endPage, true, 9);
+//        System.out.println(pathCollection);
+//        
+//        for ( GraphPath<Page, DefaultEdge> path : pathCollection) {
+//        	System.out.println(((Link) path.getVertexList()).getTitle());
+//        }
+//        
 		
 		
 		// create list of topics to return 
 //		return pathCollection;
+	}
+	
+	
+	// helper method to build child notes
+	
+	private void buildChildNodes(Graph<Page, DefaultEdge> graph, Page parent, int countdown) {
+		if( countdown < 1) {
+			return;
+		}
+		else {
+			for(Link link : parent.getLinks()) {
+				Page childPage = generatePage(link.getTitle());
+				graph.addVertex(childPage);
+				graph.addEdge(parent, childPage);
+				buildChildNodes(graph, childPage, (countdown - 1));
+			}
+		}
 	}
 
 }
