@@ -95,16 +95,17 @@ public class PathService {
         directedGraph.addEdge("i", "h");
         directedGraph.addEdge("i", "e");
 		
-		
 		// get paths from start (i)
         
         DijkstraShortestPath<String, DefaultEdge> dijkstraAlg = new DijkstraShortestPath<>(directedGraph);
 		
         SingleSourcePaths<String, DefaultEdge> iPaths = dijkstraAlg.getPaths("i");
 		
-		// return paths only to end
+		// return best path only to end
         System.out.println(iPaths.getPath("c") + "\n");
         
+        
+        // for all the possible paths
         
         AllDirectedPaths<String, DefaultEdge> dirPaths = new AllDirectedPaths<String, DefaultEdge>(directedGraph);
 		List<GraphPath<String, DefaultEdge>> pathCollection = dirPaths.getAllPaths("i", "c", true, 9);
