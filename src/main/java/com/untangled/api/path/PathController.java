@@ -25,7 +25,7 @@ public class PathController {
 		String formatEnd = end.replaceAll("%20", "_");
 		formatEnd = formatEnd.replaceAll(" ", "_");
 				
-		pathService.generatePaths(formatStart, formatEnd);
+		pathService.newGeneratePaths(start, end);
 	}
 	
 //	@RequestMapping("/testapi")
