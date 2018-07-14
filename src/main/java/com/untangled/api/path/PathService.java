@@ -184,6 +184,8 @@ public class PathService {
 			Page parentPage = generatePage(parent);
 			if (parentPage != null) {
 				for (Link link : parentPage.getLinks()) {
+					System.out.println("MADe CHILD");
+					System.out.println(link.getTitle());
 					graph.addVertex(link.getTitle());
 					graph.addEdge(parent, link.getTitle());
 					newBuildChildNodes(graph, link.getTitle(), (countdown - 1));

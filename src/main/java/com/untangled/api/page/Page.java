@@ -30,9 +30,6 @@ public class Page {
 
 	public void setLinks(Link[] links) {
 		this.links = links;
-		for(Link link : this.links) {
-			System.out.println(link.getTitle());
-		}
 	}
 	
 
