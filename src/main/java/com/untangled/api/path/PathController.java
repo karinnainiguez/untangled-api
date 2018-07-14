@@ -17,15 +17,15 @@ public class PathController {
 	private PathService pathService;
 	
 	@RequestMapping("/paths/{start}/{end}")
-	public void getPaths(@PathVariable String start, @PathVariable String end) {
+	public PathCollection getPaths(@PathVariable String start, @PathVariable String end) {
 		
-		String formatStart = start.replaceAll("%20", "_");
-		formatStart = formatStart.replaceAll(" ", "_");
-		
-		String formatEnd = end.replaceAll("%20", "_");
-		formatEnd = formatEnd.replaceAll(" ", "_");
+//		String formatStart = start.replaceAll("%20", "_");
+//		formatStart = formatStart.replaceAll(" ", "_");
+//		
+//		String formatEnd = end.replaceAll("%20", "_");
+//		formatEnd = formatEnd.replaceAll(" ", "_");
 				
-		pathService.newGeneratePaths(start, end);
+		return pathService.newGeneratePaths(start, end);
 	}
 	
 //	@RequestMapping("/testapi")

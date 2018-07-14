@@ -45,7 +45,7 @@ public class PathService {
 		String stringResponse = restTemplate.getForObject(
 				"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&pllimit=max&plnamespace=0&titles="
 						+ formatName,
-				String.class);
+						String.class);
 
 		if (stringResponse.length() < 300) {
 			return null;
@@ -142,9 +142,9 @@ public class PathService {
 			return;
 		} else {
 			for (Link link : parent.getLinks()) {
-				
+
 				Page childPage = generatePage(link.getTitle());
-				
+
 				if (childPage != null) {
 					System.out.println("MADE CHILD PAGE");
 					System.out.println(childPage.getTitle());
@@ -156,7 +156,7 @@ public class PathService {
 		}
 	}
 
-	public void newGeneratePaths(String start, String end) {
+	public PathCollection newGeneratePaths(String start, String end) {
 
 		// create a graph from the start page
 
@@ -164,14 +164,16 @@ public class PathService {
 
 		directedGraph.addVertex(start);
 		newBuildChildNodes(directedGraph, start, 2);
-		
+
 		// for all the possible paths
 
-		 AllDirectedPaths<String, DefaultEdge> dirPaths = new AllDirectedPaths<String, DefaultEdge>(directedGraph);
-		 
-		 List<GraphPath<String, DefaultEdge>> pathCollection = dirPaths.getAllPaths(start, end, true, 3);
-		 
-		 System.out.println(pathCollection);
+		AllDirectedPaths<String, DefaultEdge> dirPaths = new AllDirectedPaths<String, DefaultEdge>(directedGraph);
+
+		List<GraphPath<String, DefaultEdge>> pathCollection = dirPaths.getAllPaths(start, end, true, 3);
+
+		System.out.println(pathCollection);
+		
+		return generateCollection(start, end, pathCollection);
 	}
 
 	// NEW helper method to build child notes
@@ -184,14 +186,28 @@ public class PathService {
 			Page parentPage = generatePage(parent);
 			if (parentPage != null) {
 				for (Link link : parentPage.getLinks()) {
-					System.out.println("MADe CHILD");
-					System.out.println(link.getTitle());
 					graph.addVertex(link.getTitle());
 					graph.addEdge(parent, link.getTitle());
 					newBuildChildNodes(graph, link.getTitle(), (countdown - 1));
 				}
 			}
 		}
+	}
+
+	// HELPER METHOD - create and return an instance of PathCollection
+	private PathCollection generateCollection(String from, String to, List<GraphPath<String, DefaultEdge>> list ) {
+		ArrayList<ArrayList<String>> pathList = new ArrayList<ArrayList<String>>();
+		
+		for(GraphPath<String, DefaultEdge> graphPath : list) {
+			graphPath.getVertexList();
+			pathList.add((ArrayList<String>) graphPath.getVertexList());	
+		}
+		
+		
+		
+		PathCollection path = new PathCollection(from, to, pathList);
+		
+		return path;
 	}
 
 }
