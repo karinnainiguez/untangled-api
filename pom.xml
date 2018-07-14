@@ -4,7 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.untangled.api</groupId>
 	<artifactId>untangled-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>	
+	<version>0.0.1-SNAPSHOT</version>
+	
+	<packaging>war</packaging> 
+	
 	<name>Untangled Backend API</name>
 
 	<parent>
