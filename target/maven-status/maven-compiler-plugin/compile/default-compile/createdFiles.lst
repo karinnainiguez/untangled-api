@@ -1,6 +1,7 @@
 com/untangled/api/UntangledApiApp.class
 com/untangled/api/link/Link.class
 com/untangled/api/page/Page.class
-com/untangled/api/path/PathController.class
 com/untangled/api/path/Path.class
+com/untangled/api/path/PathCollection.class
+com/untangled/api/path/PathController.class
 com/untangled/api/path/PathService.class
