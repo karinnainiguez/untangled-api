@@ -5,9 +5,16 @@
 	<groupId>com.untangled.api</groupId>
 	<artifactId>untangled-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
-	<packaging>jar</packaging> 
-	
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
 	<name>Untangled Backend API</name>
 
 	<parent>
