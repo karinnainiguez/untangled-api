@@ -41,6 +41,11 @@ public class PathController {
 //				).getBody();
 //	}
 	
+	@RequestMapping("testing/{start}/{end}")
+	public PathCollection bestPaths(@PathVariable String start, @PathVariable String end) {
+		return pathService.generateBestPath(start, end);
+	}
+	
 	@RequestMapping("/newTest/{pageName}")
 	public Page newResponse(@PathVariable String pageName) {
 		return pathService.generatePage(pageName);
