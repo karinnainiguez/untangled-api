@@ -1,22 +1,14 @@
 package com.untangled.api.path;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import org.jgrapht.GraphPath;
-import org.jgrapht.graph.DefaultEdge;
 
 public class PathCollection {
+	
 	private String from;
 	private String to;
 	private ArrayList<ArrayList<String>> paths;
 	
 	public PathCollection() {}
-	
-//	
-//	public PathCollection(List<GraphPath<String, DefaultEdge>>) {
-//		super();
-//	}
 	
 	
 	public PathCollection(String from, String to, ArrayList<ArrayList<String>> paths) {

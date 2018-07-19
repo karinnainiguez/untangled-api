@@ -2,18 +2,13 @@ package com.untangled.api.path;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
-import org.jgrapht.alg.connectivity.KosarajuStrongConnectivityInspector;
-import org.jgrapht.alg.interfaces.ShortestPathAlgorithm.SingleSourcePaths;
-import org.jgrapht.alg.interfaces.StrongConnectivityAlgorithm;
 import org.jgrapht.alg.shortestpath.AllDirectedPaths;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.springframework.stereotype.Service;
@@ -28,6 +23,7 @@ public class PathService {
 
 	RestTemplate restTemplate = new RestTemplate();
 
+		// HELPER METHOD- generate page from string with API call
 	public Page generatePage(String pageName) {
 
 		// format page name without whitespace
@@ -41,9 +37,7 @@ public class PathService {
 				String.class);
 
 		// return null if string not length of success
-		if (stringResponse.length() < 300) {
-			return null;
-		}
+		if (stringResponse.length() < 300) { return null; }
 
 		// PARSE - truncate string to only the page info.
 		String subString = stringResponse.substring(stringResponse.indexOf("pageid") - 2,
@@ -62,44 +56,6 @@ public class PathService {
 
 		// return page instance.
 		return page;
-	}
-
-	public PathCollection newGeneratePaths(String start, String end) {
-
-		// create a graph from the start page
-
-		Graph<String, DefaultEdge> directedGraph = new DefaultDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
-
-		directedGraph.addVertex(start);
-		newBuildChildNodes(directedGraph, start, 4);
-
-		// for all the possible paths
-
-		AllDirectedPaths<String, DefaultEdge> dirPaths = new AllDirectedPaths<String, DefaultEdge>(directedGraph);
-
-		List<GraphPath<String, DefaultEdge>> pathCollection = dirPaths.getAllPaths(start, end, true, 3);
-
-		System.out.println(pathCollection);
-
-		return generateCollection(start, end, pathCollection);
-	}
-
-	// NEW helper method to build child notes
-
-	private void newBuildChildNodes(Graph<String, DefaultEdge> graph, String parent, int countdown) {
-		if (countdown < 1) {
-			return;
-		} else {
-
-			Page parentPage = generatePage(parent);
-			if (parentPage != null) {
-				for (Link link : parentPage.getLinks()) {
-					graph.addVertex(link.getTitle());
-					graph.addEdge(parent, link.getTitle());
-					newBuildChildNodes(graph, link.getTitle(), (countdown - 1));
-				}
-			}
-		}
 	}
 
 	// HELPER METHOD - create and return an instance of PathCollection
@@ -125,7 +81,7 @@ public class PathService {
 		return path;
 	}
 
-	public PathCollection generateBestPath(String start, String end) {
+	public PathCollection generatePaths(String start, String end) {
 
 		// create a graph from the start page
 
@@ -146,6 +102,7 @@ public class PathService {
 		return generateCollection(start, end, pathCollection);
 	}
 
+		// HELPER METHOD - generate children from string parent RECURSIVE
 	private void childNodes(Graph<String, DefaultEdge> graph, String parent, String goal, ArrayList<String> collection,
 			int countdown) {
 
