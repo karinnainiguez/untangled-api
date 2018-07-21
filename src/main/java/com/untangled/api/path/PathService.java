@@ -89,7 +89,7 @@ public class PathService {
 
 		directedGraph.addVertex(start);
 		ArrayList<String> nodeCollection = new ArrayList<String>();
-		childNodes(directedGraph, start, end, nodeCollection, 2);
+		childNodes(directedGraph, start, end, nodeCollection, 0);
 
 		// for all the possible paths
 
@@ -102,28 +102,112 @@ public class PathService {
 		return generateCollection(start, end, pathCollection);
 	}
 
-		// HELPER METHOD - generate children from string parent RECURSIVE
+		// HELPER METHOD - generate children from string parent ITERATIVE!
 	private void childNodes(Graph<String, DefaultEdge> graph, String parent, String goal, ArrayList<String> collection,
 			int countdown) {
 
-		if (countdown < 1 || collection.contains(parent) || parent == goal) {
-			return;
-		}
+		// PARENT
 
 		Page parentPage = generatePage(parent);
 		
 		if (parentPage != null) {
-			collection.add(parent);
-			for (Link link : parentPage.getLinks()) {
-				graph.addVertex(link.getTitle());
-				graph.addEdge(parent, link.getTitle());
+			for (Link firstChild : parentPage.getLinks()) {
+				String firstChildTitle = firstChild.getTitle();
+				graph.addVertex(firstChildTitle);
+				graph.addEdge(parent, firstChildTitle);
 				
-				if(!collection.contains(link.getTitle())) {
-					childNodes(graph, link.getTitle(), goal, collection, (countdown - 1));
+				if(firstChildTitle.equals(goal)) {
+					countdown = countdown + 1;
+					System.out.println("FOUND " + countdown);
 				}
+				
+				
+				// FIRST CHILD
+					
+				Page firstChildPage = generatePage(firstChildTitle);
+				
+				
+				if (firstChildPage != null) {
+					for (Link secondChild : firstChildPage.getLinks()) {
+						String secondChildTitle = secondChild.getTitle();
+						graph.addVertex(secondChildTitle);
+						graph.addEdge(firstChildTitle, secondChildTitle);
+						
+						if(secondChildTitle.equals(goal)) {
+							countdown = countdown + 1;
+							System.out.println("FOUND " + countdown);
+						}
+						
+						
+						// SECOND CHILD
+							
+						Page secondChildPage = generatePage(secondChildTitle);
+						
+						if (secondChildPage != null) {
+							for (Link thirdChild : secondChildPage.getLinks()) {
+								String thirdChildTitle = thirdChild.getTitle();
+								graph.addVertex(thirdChildTitle);
+								graph.addEdge(secondChildTitle, thirdChildTitle);
+								
+								if(thirdChildTitle.equals(goal)) {
+									countdown = countdown + 1;
+									System.out.println("FOUND " + countdown);
+								}
+								
+								
+								// THIRD CHILD
+									
+								Page thirdChildPage = generatePage(thirdChildTitle);
+								
+								if (thirdChildPage != null) {
+									for (Link fourthChild : thirdChildPage.getLinks()) {
+										String fourthChildTitle = fourthChild.getTitle();
+										graph.addVertex(fourthChildTitle);
+										graph.addEdge(thirdChildTitle, fourthChildTitle);
+										
+										if(fourthChildTitle.equals(goal)) {
+											countdown = countdown + 1;
+											System.out.println("FOUND " + countdown);
+										}
+										
+										
+										// FOURTH CHILD
+											
+										Page fourthChildPage = generatePage(fourthChildTitle);
+										
+										if (fourthChildPage != null) {
+											for (Link fifthChild : fourthChildPage.getLinks()) {
+												String fifthChildTitle = fifthChild.getTitle();
+												graph.addVertex(fifthChildTitle);
+												graph.addEdge(fourthChildTitle, fifthChildTitle);
+												
+												if(fifthChildTitle.equals(goal)) {
+													countdown = countdown + 1;
+													System.out.println("FOUND " + countdown);
+												}
+											}
+											
+											if(countdown > 1) {
+												return;
+											}
+										}     // END OF FOURTH CHILD
+			
+										
+									}
+								}  // END OF THIRD CHILD
+								
+								
+							}
+						} // END OF SECOND CHILD
+													
+						
+					}
+				}  // END OF FIRST CHILD
+				
+				
 			}
-		}
+		}  // END OF PARENT
 
-	}
+	} // END OF METHOD
 
-}
+} //END OF CLASS
