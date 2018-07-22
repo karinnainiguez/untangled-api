@@ -1,8 +1,6 @@
 package com.untangled.api.wiki;
 
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +18,13 @@ public class WikiController {
 		return wikiService.mapGraph(start);
 	}
 	
-	@RequestMapping("/findPaths/{start}/{end}")
+	@RequestMapping("/allPaths/{start}/{end}")
 	public Iterable<Map<String, Wiki>> findPaths(@PathVariable String start, @PathVariable String end) {
+		return wikiService.allPaths(start, end);
+	}
+	
+	@RequestMapping("/findPaths/{start}/{end}")
+	public Iterable<Map<String, Wiki>> anotherPaths(@PathVariable String start, @PathVariable String end) {
 		return wikiService.findPaths(start, end);
 	}
 

@@ -3,7 +3,6 @@ package com.untangled.api.wiki;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,21 @@ public class WikiService {
 	RestTemplate restTemplate = new RestTemplate();
 	ObjectMapper objectMapper = new ObjectMapper();
 	
+	public Iterable<Map<String, Wiki>> allPaths(String start, String end) {
+		Iterable<Map<String, Wiki>> possiblePaths = repo.findPaths(start, end);
+		int count = 0;
+		for( Map<String, Wiki> row : possiblePaths ) { count = count + 1; }
+		
+		System.out.println(count);
+		if( count < 1 ) {
+			recursiveChildren(start, 3);
+			possiblePaths = repo.findPaths(start, end);
+		}
+		
+		return possiblePaths;
+
+	}
+	
 	public Iterable<Map<String, Wiki>> findPaths(String start, String end) {
 		Iterable<Map<String, Wiki>> response = repo.findPaths(start, end);
 		System.out.println(response);
@@ -29,7 +43,7 @@ public class WikiService {
 	}
 	
 	public String mapGraph(String title) {
-		recursiveChildren(title, 2);
+		recursiveChildren(title, 3);
 		return "SOMETHING IS HAPPENING :) ";
 	}
 	

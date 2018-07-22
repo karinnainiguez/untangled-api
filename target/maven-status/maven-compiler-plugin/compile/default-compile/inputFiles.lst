@@ -1,12 +1,13 @@
 /Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/page/Page.java
 /Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/UntangledApiApp.java
-/Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/path/PathCollection.java
 /Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/path/Path.java
+/Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/wiki/Wiki.java
+/Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/link/Link.java
+/Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/wiki/WikiController.java
+/Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/wiki/WikiPath.java
+/Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/path/PathCollection.java
 /Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/wiki/WikiRepository.java
 /Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/path/PathService.java
-/Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/wiki/Wiki.java
 /Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/wiki/WikiService.java
-/Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/link/Link.java
 /Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/wiki/WikiConnection.java
-/Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/wiki/WikiController.java
 /Users/karinnainiguez/Documents/ada/Capstone-API/src/main/java/com/untangled/api/path/PathController.java
