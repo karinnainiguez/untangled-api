@@ -1,6 +1,7 @@
 package com.untangled.api.wiki;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,9 +11,9 @@ public class WikiController {
 	@Autowired
 	private WikiService wikiService;
 	
-	@RequestMapping("/testing")
-	public String testing() {
-		return wikiService.practice();
+	@RequestMapping("/graphOut/{start}")
+	public String testing(@PathVariable String start) {
+		return wikiService.mapGraph(start);
 	}
 
 }
