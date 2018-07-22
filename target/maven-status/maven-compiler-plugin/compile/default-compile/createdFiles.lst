@@ -1,8 +1,13 @@
-com/untangled/api/UntangledApiApp.class
-com/untangled/api/link/Link.class
+com/untangled/api/wiki/WikiController.class
+com/untangled/api/wiki/WikiConnection.class
+com/untangled/api/wiki/WikiRepository.class
 com/untangled/api/page/Page.class
-com/untangled/api/path/PathService$1.class
 com/untangled/api/path/Path.class
+com/untangled/api/wiki/Wiki.class
+com/untangled/api/wiki/WikiService.class
 com/untangled/api/path/PathCollection.class
 com/untangled/api/path/PathController.class
 com/untangled/api/path/PathService.class
+com/untangled/api/UntangledApiApp.class
+com/untangled/api/link/Link.class
+com/untangled/api/path/PathService$1.class

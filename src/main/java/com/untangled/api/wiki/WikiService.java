@@ -37,7 +37,17 @@ public class WikiService {
 				"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&pllimit=max&plnamespace=0&titles="
 						+ formatTitle(title),
 				String.class);
-		System.out.println(stringResponse);
+		
+		String newString = parser(stringResponse);
+		System.out.println(newString);
+	}
+	
+	// HELPER - parse string to arrayList of strings
+	private String parser(String original) {
+		String subString = original.substring(original.indexOf("links") + 7,
+				original.lastIndexOf("]") + 1);
+		String arrString = subString.replaceAll("\\{\"ns\":0,\"title\":", "").replaceAll("\\}", "");
+		return arrString;
 	}
 	
 	// HELPER - format titles
