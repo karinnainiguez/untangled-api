@@ -52,5 +52,9 @@ public class Wiki {
 	public void setLinks(List<Wiki> links) {
 		this.links = links;
 	}
+	
+	public String toString() {
+		return this.title;
+	}
 
 }

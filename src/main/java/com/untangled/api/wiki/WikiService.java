@@ -2,6 +2,8 @@ package com.untangled.api.wiki;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,10 @@ public class WikiService {
 	RestTemplate restTemplate = new RestTemplate();
 	ObjectMapper objectMapper = new ObjectMapper();
 	
-	public String findPaths(String start, String end) {
-		return "FROM SERVICE: Some String " + start + end;
+	public Iterable<Map<String, Wiki>> findPaths(String start, String end) {
+		Iterable<Map<String, Wiki>> response = repo.findPaths(start, end);
+		System.out.println(response);
+		return response;
 	}
 	
 	public String mapGraph(String title) {
