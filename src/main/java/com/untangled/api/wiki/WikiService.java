@@ -20,6 +20,10 @@ public class WikiService {
 	RestTemplate restTemplate = new RestTemplate();
 	ObjectMapper objectMapper = new ObjectMapper();
 	
+	public String findPaths(String start, String end) {
+		return "FROM SERVICE: Some String " + start + end;
+	}
+	
 	public String mapGraph(String title) {
 		recursiveChildren(title, 2);
 		return "SOMETHING IS HAPPENING :) ";

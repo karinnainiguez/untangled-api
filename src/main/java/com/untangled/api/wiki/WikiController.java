@@ -18,7 +18,7 @@ public class WikiController {
 	
 	@RequestMapping("/findPaths/{start}/{end}")
 	public String findPaths(@PathVariable String start, @PathVariable String end) {
-		return "Some String " + start + end;
+		return wikiService.findPaths(start, end);
 	}
 
 }
