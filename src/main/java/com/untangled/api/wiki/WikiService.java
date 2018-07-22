@@ -13,18 +13,18 @@ public class WikiService {
 		System.out.println("INSIDE THE METHOD");
 		System.out.println(repo.findAll());
 		
-		Wiki firstWiki = new Wiki("title numero 1");
-		Wiki secondWiki = new Wiki("title numero 2");
-		Wiki thirdWiki = new Wiki("title third one");
-		
-		repo.save(firstWiki);
-		repo.save(secondWiki);
-		repo.save(thirdWiki);
+//		repo.deleteAll();
+		connect("adding first", "second");
 		
 		
 		
 		System.out.println(repo.findAll());
 		return "SOMETHING IS HAPPENING :) ";
+	}
+	
+	// HELPER CONNECT PARENT AND CHILD (creates wiki if not existant)
+	private void connect(String parent, String child) {
+		repo.addConnection(parent, child);
 	}
 
 }
