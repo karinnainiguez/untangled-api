@@ -15,5 +15,10 @@ public class WikiController {
 	public String testing(@PathVariable String start) {
 		return wikiService.mapGraph(start);
 	}
+	
+	@RequestMapping("/findPaths/{start}/{end}")
+	public String findPaths(@PathVariable String start, @PathVariable String end) {
+		return "Some String " + start + end;
+	}
 
 }
