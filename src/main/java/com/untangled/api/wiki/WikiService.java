@@ -28,7 +28,7 @@ public class WikiService {
 		
 		System.out.println(count);
 		if( count < 1 ) {
-			recursiveChildren(start, 3);
+			recursiveChildren(start, 2);
 			possiblePaths = repo.findPaths(start, end);
 		}
 		
@@ -43,7 +43,7 @@ public class WikiService {
 	}
 	
 	public String mapGraph(String title) {
-		recursiveChildren(title, 3);
+		recursiveChildren(title, 2);
 		return "SOMETHING IS HAPPENING :) ";
 	}
 	

@@ -19,12 +19,12 @@ public class WikiController {
 	}
 	
 	@RequestMapping("/allPaths/{start}/{end}")
-	public Iterable<Map<String, Wiki>> findPaths(@PathVariable String start, @PathVariable String end) {
+	public Iterable<Map<String, Wiki>> allPaths(@PathVariable String start, @PathVariable String end) {
 		return wikiService.allPaths(start, end);
 	}
 	
 	@RequestMapping("/findPaths/{start}/{end}")
-	public Iterable<Map<String, Wiki>> anotherPaths(@PathVariable String start, @PathVariable String end) {
+	public Iterable<Map<String, Wiki>> findPaths(@PathVariable String start, @PathVariable String end) {
 		return wikiService.findPaths(start, end);
 	}
 
