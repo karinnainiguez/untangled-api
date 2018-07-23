@@ -27,5 +27,10 @@ public class WikiController {
 	public Iterable<Map<String, Wiki>> findPaths(@PathVariable String start, @PathVariable String end) {
 		return wikiService.findPaths(start, end);
 	}
+	
+	@RequestMapping("/clearDB")
+	public void clearDB() {
+		wikiService.clearDB();
+	}
 
 }

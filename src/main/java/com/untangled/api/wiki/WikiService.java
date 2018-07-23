@@ -47,6 +47,10 @@ public class WikiService {
 		return "SOMETHING IS HAPPENING :) ";
 	}
 	
+	public void clearDB() {
+		repo.clearDB();
+	}
+	
 	
 	// HELPER - RECURSIVEEEEE build child nodes from parent string
 	private void recursiveChildren(String parent, int countdown) {
@@ -101,5 +105,7 @@ public class WikiService {
 		String newTitle = title.replaceAll("%20", "_").replaceAll(" ", "_");
 		return newTitle;
 	}
+
+	
 
 }
