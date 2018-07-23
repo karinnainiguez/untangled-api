@@ -32,5 +32,10 @@ public class WikiController {
 	public void clearDB() {
 		wikiService.clearDB();
 	}
+	
+	@RequestMapping("/seedData")
+	public void seedData() {
+		wikiService.seedData();
+	}
 
 }
