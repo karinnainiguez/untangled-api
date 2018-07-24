@@ -1,5 +1,8 @@
 package com.untangled.api.wiki;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -52,6 +55,8 @@ public class WikiService {
 	}
 	
 	public void seedData() {
+
+		File file = new File(getClass().getResource("file/testingfile.txt").getFile());
 		
 		
 	}
