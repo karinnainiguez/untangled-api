@@ -16,7 +16,7 @@ public interface WikiRepository extends Neo4jRepository<Wiki, Long> {
 	@Query("MERGE (p:Wiki{title: {parent}}) MERGE (c:Wiki{title: {child}}) MERGE (p)-[:LINKS_TO]->(c)")
 	void addConnection(@Param("parent") String parent, @Param("child") String child);
 	
-	@Query("MATCH (s:Wiki{title: {start}}) MATCH (e:Wiki{title: {end}}) MATCH path = (s) -[:LINKS_TO*..10]-> (e) RETURN nodes(path) ORDER BY length(path) LIMIT 18")
+	@Query("MATCH (s:Wiki{title: {start}}) MATCH (e:Wiki{title: {end}}) MATCH path = allShortestPaths( (s) -[:LINKS_TO*..10]-> (e) ) RETURN nodes(path) ORDER BY length(path) LIMIT 18")
 	Iterable<Map<String, Wiki>> findPaths(@Param("start") String start, @Param("end") String end);
 
 	@Query("MATCH(n) DETACH DELETE n")

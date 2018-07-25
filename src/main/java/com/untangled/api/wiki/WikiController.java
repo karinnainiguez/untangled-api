@@ -1,5 +1,6 @@
 package com.untangled.api.wiki;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class WikiController {
 	}
 	
 	@RequestMapping("/seedData")
-	public void seedData() {
+	public void seedData() throws IOException {
 		wikiService.seedData();
 	}
 

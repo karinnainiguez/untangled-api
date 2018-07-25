@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -14,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.opencsv.CSVReader;
 
 @Service
 public class WikiService {
@@ -54,10 +58,18 @@ public class WikiService {
 		repo.clearDB();
 	}
 	
-	public void seedData() {
-
-		File file = new File(getClass().getResource("file/testingfile.txt").getFile());
-		
+	public void seedData() throws IOException {
+		final String CSV_PATH = "src/main/resources/file/testingfile.csv";
+		try (
+	            Reader reader = Files.newBufferedReader(Paths.get(CSV_PATH));
+	            CSVReader csvReader = new CSVReader(reader);
+	        ) {
+	            // Reading Records One by One in a String array
+	            String[] nextRecord;
+	            while ((nextRecord = csvReader.readNext()) != null) {
+	                System.out.println(nextRecord[0]);
+	            }
+	        }
 		
 	}
 	
